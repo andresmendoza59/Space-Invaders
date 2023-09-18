@@ -72,7 +72,6 @@ ejecutando = True
 
 # Iteración infinita de la ventana
 while ejecutando:
-    # screen.fill((0, 0, 15))
     screen.blit(fondo, (0,0))
 
     for evento in pygame.event.get():
@@ -147,4 +146,4 @@ while ejecutando:
 
     jugador.mostrar_entidad()
     puntaje.mostrar_puntaje()
-    pygame.display.update()    
+    pygame.display.update()
