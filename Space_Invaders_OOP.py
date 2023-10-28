@@ -8,12 +8,12 @@ screen = pygame.display.set_mode((800, 600))
 
 # Se cambia el título e ícono de la ventana
 pygame.display.set_caption("Space Invaders")
-icono = pygame.image.load("alien.png")
+icono = pygame.image.load("multimedia/alien.png")
 pygame.display.set_icon(icono)
 
 # Se carga la imagen del fondo y la música del juego
-fondo = pygame.image.load("space.jpg").convert_alpha()
-pygame.mixer.music.load("musica_de_fondo.mp3")
+fondo = pygame.image.load("multimedia/space.jpg").convert_alpha()
+pygame.mixer.music.load("multimedia/musica_de_fondo.mp3")
 pygame.mixer.music.play(-1)
 
 # Se crean las instancias de la clase Texto
@@ -21,12 +21,12 @@ puntaje = Texto(tamaño = 24, COORDENADA_X = 10, COORDENADA_Y = 10, valor = 0)
 texto_game_over = Texto(tamaño = 48, COORDENADA_X = 280, COORDENADA_Y = 250, valor = "Game Over")
 
 # Se crean las instancias de la clase Entidad
-jugador = Entidad(imagen = "spaceship.png", posicion_x = 370,posicion_y = 480, cambio_posicion_x = 0, cambio_posicion_y = 0)
+jugador = Entidad(imagen = "multimedia/spaceship.png", posicion_x = 370,posicion_y = 480, cambio_posicion_x = 0, cambio_posicion_y = 0)
 
-enemigo = [Entidad(imagen = "enemy.png", posicion_x = random.randint(64, 736), posicion_y = random.randint(64, 136),
+enemigo = [Entidad(imagen = "multimedia/enemy.png", posicion_x = random.randint(64, 736), posicion_y = random.randint(64, 136),
                    cambio_posicion_x = 0.3, cambio_posicion_y = 25) for _ in range(6)]
 
-bala = Entidad(imagen = "bullet.png", posicion_x = jugador.posicion_x, posicion_y = 480, cambio_posicion_x = 0, \
+bala = Entidad(imagen = "multimedia/bullet.png", posicion_x = jugador.posicion_x, posicion_y = 480, cambio_posicion_x = 0, \
                cambio_posicion_y = 0.8)
 estado_bala = False
 
@@ -65,7 +65,7 @@ while ejecutando:
             # Dibuja la bala en la pantalla de juego, al presionarse espacio.
             if evento.key == pygame.K_SPACE:
                 if estado_bala == False:
-                    sonido_bala = pygame.mixer.Sound("laser-arma.mp3")
+                    sonido_bala = pygame.mixer.Sound("multimedia/laser-arma.mp3")
                     sonido_bala.play()
                     bala.posicion_x = jugador.posicion_x
                     disparar(bala.posicion_x, bala.posicion_y)
@@ -105,7 +105,7 @@ while ejecutando:
         # Colisión
         verificar_colision = colision(enemigo[i].posicion_x, enemigo[i].posicion_y, bala.posicion_x, bala.posicion_y)
         if verificar_colision:
-            sonido_colision = pygame.mixer.Sound("colision.mp3")
+            sonido_colision = pygame.mixer.Sound("multimedia/colision.mp3")
             sonido_colision.play()
             bala.posicion_y = 480
             estado_bala = False
@@ -114,7 +114,7 @@ while ejecutando:
             enemigo[i].posicion_y = random.randint(64, 136)
 
         enemigo[i].mostrar_entidad()
-        print(enemigo[1].cambio_posicion_x)
+
     # Movimiento de la bala, se cambia su estado, y se invoca a la función 'disparar'
     if bala.posicion_y <= 0:
         bala.posicion_y = 480
