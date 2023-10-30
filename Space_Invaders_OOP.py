@@ -2,6 +2,7 @@ import pygame
 import random
 from modelo.clase_texto import Texto
 from modelo.clase_entidad import Entidad
+from modelo.clase_sonido import Sonido
 pygame.init()
 pygame.mixer.init()
 screen = pygame.display.set_mode((800, 600))
@@ -13,8 +14,10 @@ pygame.display.set_icon(icono)
 
 # Se carga la imagen del fondo y la música del juego
 fondo = pygame.image.load("multimedia/space.jpg").convert_alpha()
-pygame.mixer.music.load("multimedia/musica_de_fondo.mp3")
-pygame.mixer.music.play(-1)
+musica_fondo = Sonido("multimedia/musica_de_fondo.mp3")
+musica_fondo.reproducir_musica()
+# pygame.mixer.music.load("multimedia/musica_de_fondo.mp3")
+# pygame.mixer.music.play(-1)
 
 # Se crean las instancias de la clase Texto
 puntaje = Texto(tamaño = 24, COORDENADA_X = 10, COORDENADA_Y = 10, valor = 0)
@@ -25,7 +28,6 @@ jugador = Entidad(imagen = "multimedia/spaceship.png", posicion_x = 370,posicion
 
 enemigo = [Entidad(imagen = "multimedia/enemy.png", posicion_x = random.randint(64, 736), posicion_y = random.randint(64, 136),
                    cambio_posicion_x = 0.3, cambio_posicion_y = 25) for _ in range(6)]
-
 bala = Entidad(imagen = "multimedia/bullet.png", posicion_x = jugador.posicion_x, posicion_y = 480, cambio_posicion_x = 0, \
                cambio_posicion_y = 0.8)
 estado_bala = False
@@ -65,8 +67,10 @@ while ejecutando:
             # Dibuja la bala en la pantalla de juego, al presionarse espacio.
             if evento.key == pygame.K_SPACE:
                 if estado_bala == False:
-                    sonido_bala = pygame.mixer.Sound("multimedia/laser-arma.mp3")
-                    sonido_bala.play()
+                    sonido_bala = Sonido("multimedia/laser-arma.mp3")
+                    sonido_bala.reproducir_sonido()
+                    # sonido_bala = pygame.mixer.Sound("multimedia/laser-arma.mp3")
+                    # sonido_bala.play()
                     bala.posicion_x = jugador.posicion_x
                     disparar(bala.posicion_x, bala.posicion_y)
 
@@ -105,8 +109,10 @@ while ejecutando:
         # Colisión
         verificar_colision = colision(enemigo[i].posicion_x, enemigo[i].posicion_y, bala.posicion_x, bala.posicion_y)
         if verificar_colision:
-            sonido_colision = pygame.mixer.Sound("multimedia/colision.mp3")
-            sonido_colision.play()
+            sonido_colision = Sonido("multimedia/colision.mp3")
+            sonido_colision.reproducir_sonido()
+            # sonido_colision = pygame.mixer.Sound("multimedia/colision.mp3")
+            # sonido_colision.play()
             bala.posicion_y = 480
             estado_bala = False
             puntaje.valor += 1
