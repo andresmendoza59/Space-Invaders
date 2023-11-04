@@ -16,8 +16,6 @@ pygame.display.set_icon(icono)
 fondo = pygame.image.load("multimedia/space.jpg").convert_alpha()
 musica_fondo = Sonido("multimedia/musica_de_fondo.mp3")
 musica_fondo.reproducir_musica()
-# pygame.mixer.music.load("multimedia/musica_de_fondo.mp3")
-# pygame.mixer.music.play(-1)
 
 # Se crean las instancias de la clase Texto
 puntaje = Texto(tamaño = 24, COORDENADA_X = 10, COORDENADA_Y = 10, valor = 0)
@@ -69,8 +67,6 @@ while ejecutando:
                 if estado_bala == False:
                     sonido_bala = Sonido("multimedia/laser-arma.mp3")
                     sonido_bala.reproducir_sonido()
-                    # sonido_bala = pygame.mixer.Sound("multimedia/laser-arma.mp3")
-                    # sonido_bala.play()
                     bala.posicion_x = jugador.posicion_x
                     disparar(bala.posicion_x, bala.posicion_y)
 
@@ -111,8 +107,6 @@ while ejecutando:
         if verificar_colision:
             sonido_colision = Sonido("multimedia/colision.mp3")
             sonido_colision.reproducir_sonido()
-            # sonido_colision = pygame.mixer.Sound("multimedia/colision.mp3")
-            # sonido_colision.play()
             bala.posicion_y = 480
             estado_bala = False
             puntaje.valor += 1
